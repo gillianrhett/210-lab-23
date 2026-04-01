@@ -13,6 +13,37 @@ private:
 public: 
     Goat()                          { name = ""; age = 0; color = ""; }
     // write three more constructors
+    
+    // constructor where they enter just the name
+    Goat(string n) {
+        name = n;
+    }
+
+    // constructor where they enter the name and age
+    // with error checking for whole number age
+    Goat(string n, int a) {
+        name = n;
+        if (a >= 0) 
+            age = a;
+        else {
+            // if they entered a negative number, output a basic error message
+            cout << "Age cannot be negative. Age is set to 0.";
+            age = 0;
+        }
+    }
+
+    // constructor that sets all three member variables
+    // with error checking for whole number age
+    Goat(string n, int a, string c) {
+        name = n;
+        if (a >= 0) 
+            age = a;
+        else {
+            cout << "Age cannot be negative.  Age is set to 0.";
+            age = 0;
+        }
+        color = c;
+    }
 
     // setters and getters
     void set_name(string n)         { name = n; };
