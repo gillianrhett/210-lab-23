@@ -29,9 +29,26 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
 
-
+    int choice;
+    choice = main_menu();
 
 
     return 0;
 }
 
+int main_menu() {
+    // displays the menu and then obtains, validates, and returns the user's choice
+    int choice = 0;
+    cout << "*** GOAT MANAGER 3001 ***" << endl;
+    cout << "[1] Add a goat" << endl;
+    cout << "[2] Delete a goat" << endl;
+    cout << "[3] List goats" << endl;
+    cout << "[4] Quit" << endl;
+    while (!(choice >= 1 && choice <=4)) {
+        cout << "Choice --> ";
+        cin >> choice;
+        if(!(choice >= 1 && choice <=4))
+            cout << "Invalid input. Enter a number 1, 2, 3, or 4." << endl;
+    }
+    return choice;
+}
