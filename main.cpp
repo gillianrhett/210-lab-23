@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iomanip>
 #include <list>
+#include <limits> // for try-catch
 #include "Goat.h"
 using namespace std;
 
@@ -46,9 +47,17 @@ int main_menu() {
     cout << "[4] Quit" << endl;
     while (!(choice >= 1 && choice <=4)) {
         cout << "Choice --> ";
-        cin >> choice;
-        if(!(choice >= 1 && choice <=4))
-            cout << "Invalid input. Enter a number 1, 2, 3, or 4." << endl;
+        try {
+            cin >> choice;
+            if (cin.fail() || !(choice >= 1 && choice <=4))
+                throw invalid_argument("Invalid input. Enter a number 1, 2, 3, or 4.");
+        }
+        catch(invalid_argument& e)
+        {
+            cout << "Error: " << e.what() << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
     }
     return choice;
 }
