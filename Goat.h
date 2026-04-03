@@ -45,16 +45,6 @@ public:
         color = c;
     }
 
-    // overload the is equal operator
-    bool operator== (const Goat &other) const {
-        return this->name == other.name;
-    }
-
-    // overload the is less than operator
-    bool operator< (const Goat &other) const {
-        return this->name < other.name;
-    }
-
     // setters and getters
     void set_name(string n)         { name = n; };
     string get_name() const         { return name; };
