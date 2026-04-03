@@ -10,7 +10,7 @@ const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
 int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
-void add_goat(list<Goat> &trip, string [], string []);
+void add_goat(list<Goat> &trip, string, int, string);
 void display_trip(list<Goat> trip);
 int main_menu();
 
@@ -30,11 +30,54 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
 
-    int choice;
-    choice = main_menu();
+    // create a list for goats
+    list <Goat> myTrip;
 
+    int choice = 0;
+    while (choice != 4) {
+    // keep showing the menu after doing the action until user chooses 4 to quit
+        choice = main_menu();
+        if (choice == 1) {
+        // add a goat
+            // random inputs
+            add_goat(myTrip, "testn", 1, "testc");
+        }
+        if (choice == 2) {
+        // delete a goat
 
+        }
+        if (choice == 3) {
+        // list goats
+            display_trip(myTrip);
+        }
+        if (choice == 4) {
+        // quit
+            cout << "Goodbye." << endl;
+        }
+    }
     return 0;
+}
+
+int select_goat(list<Goat> trip) {
+
+}
+
+void delete_goat(list<Goat> &trip) {
+
+}
+
+void add_goat(list<Goat> &trip, string name, int age, string color ) {
+    // creates a new goat and adds it to the list
+    Goat g(name, age, color);
+    trip.push_back(g);
+}
+
+void display_trip(list<Goat> trip) { 
+    int count = 0;
+    for(Goat g : trip){
+        count++;
+        cout << "[" << count << "] " << g.get_name() << " (" << g.get_age() << ", " << g.get_color() << ")" << endl;
+    }
 }
 
 int main_menu() {
