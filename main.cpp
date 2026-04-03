@@ -87,9 +87,10 @@ void delete_goat(list<Goat> &trip) {
     int cur = 0; // current index in the for loop
     if (i != -1) { // if the goat was found
         for (Goat g : trip) {
-            if (i == cur)
+            if (i == cur) {
                 trip.remove(g);
-                break;
+                return;
+            }
             cur++;
         }
     }
