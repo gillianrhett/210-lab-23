@@ -40,11 +40,14 @@ int main() {
         if (choice == 1) {
         // add a goat
             // random inputs
-            add_goat(myTrip, "testn", 1, "testc");
+            string rnd_name = names[rand() % (SZ_NAMES)];
+            int rnd_age = rand() % (MAX_AGE + 1);
+            string rnd_color = colors[rand() % (SZ_COLORS)];
+            add_goat(myTrip, rnd_name, rnd_age, rnd_color);
         }
         if (choice == 2) {
         // delete a goat
-
+            delete_goat(myTrip);
         }
         if (choice == 3) {
         // list goats
@@ -52,31 +55,58 @@ int main() {
         }
         if (choice == 4) {
         // quit
-            cout << "Goodbye." << endl;
+            cout << "\tGoodbye." << endl;
         }
     }
     return 0;
 }
 
 int select_goat(list<Goat> trip) {
-
+    // returns the index of a goat given the name input by user
+    string nameIn; // user enters name of goat to delete
+    cout << "Enter name of goat to delete: ";
+    cin >> nameIn;
+    int count = 0; // for checking whether we've reached the end of the list
+    // search for a goat with this name
+    for(const Goat g : trip){
+        if (g.get_name() == nameIn) 
+            break;
+        count++;
+    }
+    if (count == trip.size()) {
+        cout << "\tName not found." << endl;
+        count = -1;
+    }
+    return count;
 }
 
 void delete_goat(list<Goat> &trip) {
-
+    // prompts the user for a name and deletes the first instance of the goat with that name
+    int i = select_goat(trip); // i = index of the goat to delete
+    int cur = 0; // current index in the for loop
+    if (i != -1) { // the function returns -1 if the goat is not found
+        // delete the goat at index i
+        for(Goat g : trip) {
+            if (i == cur) {
+                trip.remove(g);
+                break;
+            }
+            cur++;
+        }
+    }
 }
 
 void add_goat(list<Goat> &trip, string name, int age, string color ) {
-    // creates a new goat and adds it to the list
+    // create a new goat and add it to the list
     Goat g(name, age, color);
     trip.push_back(g);
 }
 
 void display_trip(list<Goat> trip) { 
     int count = 0;
-    for(Goat g : trip){
+    for(const Goat g : trip){
         count++;
-        cout << "[" << count << "] " << g.get_name() << " (" << g.get_age() << ", " << g.get_color() << ")" << endl;
+        cout << "\t[" << count << "] " << g.get_name() << " (" << g.get_age() << ", " << g.get_color() << ")" << endl;
     }
 }
 
