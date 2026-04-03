@@ -54,6 +54,15 @@ public:
     string get_color() const        { return color; }
 
     // write overloaded < operator for the std::list
+    bool operator< (const Goat &other) const {
+        return this->name < other.name;
+    }
+
+    // I couldn't use remove() without also overloading ==
+    // and I couldn't find another way to remove a selected list item
+    bool operator== (const Goat &other) const {
+        return this->name == other.name;
+    }
 };
 
 #endif
